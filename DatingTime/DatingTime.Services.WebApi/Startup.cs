@@ -103,6 +103,8 @@ namespace DatingTime.Services.Api
             IoC.RegisterModule<InfrastructureDependencyModule>();
 
             RegisterMediatRResourcesIntoSimpleInjector();
+
+            RegisterAutoMapperIntoSimpleInjector();
         }
 
         private void RegisterMediatRResourcesIntoSimpleInjector()
@@ -122,6 +124,16 @@ namespace DatingTime.Services.Api
 
             simpleInjectorContainer.RegisterSingleton(() => GetMapper(simpleInjectorContainer));
         }
+
+        public void RegisterAutoMapperIntoSimpleInjector()
+        {
+            // Recupera o Container do Simple Injector.
+            var simpleInjectorContainer = IoC.RecoverContainer();
+
+            // Registra o AutoMapper como um singleton, usando as definições do GetMapper
+            simpleInjectorContainer.RegisterSingleton(() => GetMapper(simpleInjectorContainer));
+        }
+        
 
         public IMapper GetMapper(Container container)
         {
