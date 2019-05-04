@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-//using Microsoft.Extensions.Configuration;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
@@ -22,10 +22,10 @@ namespace DatingTime.Services.Api
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
+        private readonly Microsoft.Extensions.Configuration.IConfiguration _configuration;
         private readonly Container _container;
 
-        public Startup(IConfiguration configuration)
+        public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
         {
             _configuration = configuration;
             _container = IoC.RecoverContainer();
