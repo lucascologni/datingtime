@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using AutoMapper.Configuration;
+using DatingTime.Common.Infrastructure.Bootstrap.CustomObjectMappers;
 using DatingTime.Common.Infrastructure.Bootstrap.DependencyModules;
 using DatingTime.Common.Infrastructure.DependencyResolver;
 using MediatR;
@@ -12,20 +13,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
 
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
+
 namespace DatingTime.Services.Api
 {
     public class Startup
     {
-        private readonly Microsoft.Extensions.Configuration.IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         private readonly Container _container;
 
-        public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
             _container = IoC.RecoverContainer();
@@ -35,8 +37,7 @@ namespace DatingTime.Services.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Adiciona o serviço do "MVC".
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Adiciona o serviço do framework ORM "Entity Framework" na aplicação.
             // A "ConnectionString" está localizada no arquivo "appsettings.json"
@@ -45,11 +46,6 @@ namespace DatingTime.Services.Api
             // Adiciona o serviço do "CORS" (Cross-Origin Resource Sharing) - Medida de segurança que permite restringir acesso de algum Client(Angular App) que está tentando acessar a API.
             // Acesso Cruzado - Uma aplicação hospedada em um endereço diferente acessando uma API de outro endereço.
             services.AddCors();
-
-
-
-            // Adiciona o serviço de mapeamento de objetos utilizando o "Auto Mapper".
-            //services.AddAuto();
 
             // Adiciona o serviço de injeção de dependência utilizando o "Simple Injector".
             AddSimpleInjector(services);
@@ -68,8 +64,7 @@ namespace DatingTime.Services.Api
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
 
-            // SI - Simple Injector
-            InitializeSIContainer(app);
+            InitializeSimpleInjectorContainer(app);
         }
 
         private void AddSimpleInjector(IServiceCollection services)
@@ -87,7 +82,7 @@ namespace DatingTime.Services.Api
             services.UseSimpleInjectorAspNetRequestScoping(_container);
         }
 
-        private void InitializeSIContainer(IApplicationBuilder app)
+        private void InitializeSimpleInjectorContainer(IApplicationBuilder app)
         {
             // Add application presentation components:
             _container.RegisterMvcControllers(app);
@@ -120,24 +115,25 @@ namespace DatingTime.Services.Api
             simpleInjectorContainer.Collection.Register(typeof(IRequestPreProcessor<>), Enumerable.Empty<Type>());
             simpleInjectorContainer.Collection.Register(typeof(IRequestPostProcessor<,>), Enumerable.Empty<Type>());
 
-            simpleInjectorContainer.RegisterSingleton(() => GetMapper(simpleInjectorContainer));
+            /* Registra os recursos do Auto Mapper no container do Simple Injector, com isso o Auto Mapper consegue resolver as dependências
+             * utilizando as mesmas definições do Simple Injector.
+             */
+            simpleInjectorContainer.Register(() => RegisterAutoMapperResourcesIntoSimpleInjector(simpleInjectorContainer), Lifestyle.Singleton);
         }
 
-        public IMapper GetMapper(Container container)
+        private IMapper RegisterAutoMapperResourcesIntoSimpleInjector(Container simpleInjectorContainer)
         {
             var mce = new MapperConfigurationExpression();
-            mce.ConstructServicesUsing(container.GetInstance);
+            mce.ConstructServicesUsing(simpleInjectorContainer.GetInstance);
 
-            // Classes - ENTITY TO DTO, DTO TO ENTITY
-            // mce.AddProfiles(typeof(SomeProfile).Assembly);
-            // mce.AddProfiles(typeof(SomeProfile).Assembly);
-            // mce.AddProfiles(typeof(SomeProfile).Assembly);
-            // mce.AddProfiles(typeof(SomeProfile).Assembly);
+            // Adiciona as classes(Profiles) de Mapeamento de Expressão do Auto Mapper
+            mce.AddProfiles(typeof(DtoToEntityCustomMapper).Assembly);
+            mce.AddProfiles(typeof(EntityToDtoCustomMapper).Assembly);
 
             var mc = new MapperConfiguration(mce);
             mc.AssertConfigurationIsValid();
 
-            IMapper m = new Mapper(mc, t => container.GetInstance(t));
+            IMapper m = new Mapper(mc, t => simpleInjectorContainer.GetInstance(t));
 
             return m;
         }

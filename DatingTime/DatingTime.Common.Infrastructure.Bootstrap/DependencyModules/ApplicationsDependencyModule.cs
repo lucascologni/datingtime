@@ -6,7 +6,7 @@ namespace DatingTime.Common.Infrastructure.Bootstrap.DependencyModules
     {
         public void Register()
         {
-          //  IoC.RegisterTransient<IRequestHandler<PasswordEncryptionCommand, PasswordEncryptionDto>, PasswordEncryptionHandler>();
+            //IoC.RegisterTransient<IRequestHandler<PasswordEncryptionCommand, PasswordEncryptionDto>, PasswordEncryptionHandler>();
             //IoC.RegisterTransient<IRequestHandler<AccountRegistrationCommand, AccountRegistrationDto>, AccountRegistrationHandler>();
         }
     }
