@@ -1,8 +1,8 @@
 ﻿using DatingTime.Common.Infrastructure.DependencyResolver;
 
-namespace DatingTime.Common.Infrastructure.Bootstrap.DependencyModules
+namespace DatingTime.Common.Infrastructure.Bootstrap.DependencyModules.Common
 {
-    public class InfrastructureDependencyModule : IDependencyModule
+    public class CommonInfrastructureDependencyModule : IDependencyModule
     {
         public void Register()
         {

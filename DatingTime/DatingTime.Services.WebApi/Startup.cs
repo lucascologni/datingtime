@@ -3,7 +3,9 @@ using System.Linq;
 using AutoMapper;
 using AutoMapper.Configuration;
 using DatingTime.Common.Infrastructure.Bootstrap.CustomObjectMappers;
-using DatingTime.Common.Infrastructure.Bootstrap.DependencyModules;
+using DatingTime.Common.Infrastructure.Bootstrap.DependencyModules.Accounts;
+using DatingTime.Common.Infrastructure.Bootstrap.DependencyModules.Common;
+using DatingTime.Common.Infrastructure.Bootstrap.DependencyModules.Services;
 using DatingTime.Common.Infrastructure.DependencyResolver;
 using MediatR;
 using MediatR.Pipeline;
@@ -92,10 +94,14 @@ namespace DatingTime.Services.Api
             _container.AutoCrossWireAspNetComponents(app);
 
             // Registra os módulos do sistema.
+            IoC.RegisterModule<AccountsApplicationsDependencyModule>();
+            IoC.RegisterModule<AccountsDomainDependencyModule>();
+
+            IoC.RegisterModule<CommonApplicationsDependencyModule>();
+            IoC.RegisterModule<CommonDomainDependencyModule>();
+            IoC.RegisterModule<CommonInfrastructureDependencyModule>();
+
             IoC.RegisterModule<ServicesDependencyModule>();
-            IoC.RegisterModule<ApplicationsDependencyModule>();
-            IoC.RegisterModule<DomainDependencyModule>();
-            IoC.RegisterModule<InfrastructureDependencyModule>();
 
             RegisterMediatRResourcesIntoSimpleInjector();
         }

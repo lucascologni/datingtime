@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DatingTime.Accounts.Applications.AccountManagement\DatingTime.Accounts.Applications.AccountManagement.csproj" />
+    <ProjectReference Include="..\DatingTime.Common.Applications.Security\DatingTime.Common.Applications.Security.csproj" />
     <ProjectReference Include="..\DatingTime.Common.Infrastructure.DependencyResolver\DatingTime.Common.Infrastructure.DependencyResolver.csproj" />
   </ItemGroup>
 

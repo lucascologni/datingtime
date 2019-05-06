@@ -23,19 +23,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{005F09
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{7A392FF2-AB02-4C75-AB57-0EAA3C792CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Accounts.Applications.AccountManagement", "DatingTime.Accounts.Applications.AccountManagement\DatingTime.Accounts.Applications.AccountManagement.csproj", "{65DCE39C-F221-4B18-949B-A776741A4690}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Accounts.Applications.AccountManagement", "DatingTime.Accounts.Applications.AccountManagement\DatingTime.Accounts.Applications.AccountManagement.csproj", "{65DCE39C-F221-4B18-949B-A776741A4690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Accounts.Domain", "DatingTime.Accounts.Domain\DatingTime.Accounts.Domain.csproj", "{A419BBAB-4BDD-46A2-BC3E-4B908E86527C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Accounts.Domain", "DatingTime.Accounts.Domain\DatingTime.Accounts.Domain.csproj", "{A419BBAB-4BDD-46A2-BC3E-4B908E86527C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Common.Applications.Security", "DatingTime.Common.Applications.Security\DatingTime.Common.Applications.Security.csproj", "{99C19C7F-03DD-4AC2-AB59-8A286BF27DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Common.Applications.Security", "DatingTime.Common.Applications.Security\DatingTime.Common.Applications.Security.csproj", "{99C19C7F-03DD-4AC2-AB59-8A286BF27DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Common.Domain", "DatingTime.Common.Domain\DatingTime.Common.Domain.csproj", "{D1331722-FAF9-4EDB-BB24-1F35B2177AAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Common.Domain", "DatingTime.Common.Domain\DatingTime.Common.Domain.csproj", "{D1331722-FAF9-4EDB-BB24-1F35B2177AAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Common.Infrastructure.Data.Relational", "DatingTime.Common.Infrastructure.Data.Relational\DatingTime.Common.Infrastructure.Data.Relational.csproj", "{345EF466-87F0-4D1F-8532-752F56FD2794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Common.Infrastructure.Data.Relational", "DatingTime.Common.Infrastructure.Data.Relational\DatingTime.Common.Infrastructure.Data.Relational.csproj", "{345EF466-87F0-4D1F-8532-752F56FD2794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Common.Infrastructure.Bootstrap", "DatingTime.Common.Infrastructure.Bootstrap\DatingTime.Common.Infrastructure.Bootstrap.csproj", "{C9F93883-92C7-4745-A564-D676A3DC24C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Common.Infrastructure.Bootstrap", "DatingTime.Common.Infrastructure.Bootstrap\DatingTime.Common.Infrastructure.Bootstrap.csproj", "{C9F93883-92C7-4745-A564-D676A3DC24C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingTime.Common.Infrastructure.DependencyResolver", "DatingTime.Common.Infrastructure.DependencyResolver\DatingTime.Common.Infrastructure.DependencyResolver.csproj", "{7428C6D0-84C3-49D5-96FA-E277C599AF26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingTime.Common.Infrastructure.DependencyResolver", "DatingTime.Common.Infrastructure.DependencyResolver\DatingTime.Common.Infrastructure.DependencyResolver.csproj", "{7428C6D0-84C3-49D5-96FA-E277C599AF26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
